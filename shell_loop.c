@@ -25,7 +25,6 @@ void shell_loop(void)
 char hostname;
 char username[1024];
 char cwd[64];
-char input[128];
 char *userid = getlogin();
 hostname = gethostname(username, sizeof(username));
 getcwd(cwd, sizeof(cwd));
