@@ -9,7 +9,7 @@
 #include <arpa/inet.h>
 #include "main.h"
 
-#define clrscr() printf("\e[1;1H\e[2J")
+#define clrscr() printf("\033[1;1H\e[2J")
 
 void checkhostname(int hostname)
 {
@@ -26,12 +26,13 @@ char hostname;
 char username[1024];
 char cwd[64];
 char *userid = getlogin();
-hostname = gethostname(username, sizeof(username));
-getcwd(cwd, sizeof(cwd));
-checkhostname(hostname);
 char *line;
 char **request;
 int execute = -1;
+hostname = gethostname(username, sizeof(username));
+getcwd(cwd, sizeof(cwd));
+checkhostname(hostname);
+
 while (execute == -1)
 {
 printf("\033[0;32m");
