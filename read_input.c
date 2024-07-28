@@ -11,22 +11,22 @@
 
 char *read_input(void)
 {
-    char *line;
-    size_t buffer;
+    char *line = NULL; /*needed to init variables to prevent errors*/
+    long unsigned int buffer = 0;
 
-    if(getline(line, buffer, stdin) == -1)
+    if(getline(&line, &buffer, stdin) == -1) /*if getline has an error*/
     {
-        if(feof(stdin))
+        if(feof(stdin)) /*if we have reached end of file*/
         {
-            free(line);
-            exit(1);
+            free(line); /*free the memory*/
+            exit(1); /*exit success*/
         }
         else
         {
-            free(line);
-            perror("Error reading input");
-            exit(-1);
+            free(line); /*free memory*/
+            perror("Error reading input"); /*error message*/
+            exit(-1); /*exit failure*/
         }
     }
-    return(line);
+    return(line); /*return input*/
 }
