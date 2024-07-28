@@ -13,35 +13,35 @@ char **tokenize_input(char *line)
 {
     int buffer = 64;
     int i = 0;
-    char **token = malloc(buffer * sizeof(char *));
+    char **token = malloc(buffer * sizeof(char *)); /*allocate memory for tokens*/
     char *t;
 
-    if (token == NULL)
+    if (token == NULL) /*standard memory error handling*/
     {
-        fprintf(stderr, "Error");
-        exit(-1);
+        fprintf(stderr, "Error"); /*print error message*/
+        exit(-1); /*exit failure*/
     }
-    t = strtok(line, " ");
+    t = strtok(line, " "); /*tokenize input using spaces as breaks*/
     while (t != NULL)
     {
-        if (t[0] == '#')
+        if (t[0] == '#') /*if the line is a comment*/
         {
-            break;
+            break; /*ignore this line*/
         }
-        token[i] = t;
-        i++;
-        if (i > buffer)
+        token[i] = t; /*glorified strcpy*/
+        i++; /*iterate through the input*/
+        if (i > buffer) /*if theres not enough memory allocated*/
         {
-            buffer = buffer + buffer;
-            token = realloc(token, buffer * sizeof(char *));
-            if (token == NULL)
+            buffer = buffer + buffer; /*set buffer to double its size*/
+            token = realloc(token, buffer * sizeof(char *)); /*reallocate memory*/
+            if (token == NULL) /*same error handling for memory*/
             {
-                fprintf(stderr, "error");
-                exit(-1);
+                fprintf(stderr, "error"); /*error message*/
+                exit(-1); /*exit failure*/
             }
         }
-        t = strtok(NULL, " ");
+        t = strtok(NULL, " "); /*tokenize input as before*/
     }
-    token[i] = NULL;
-    return (token);
+    token[i] = NULL; /*end tokenization with null to put a cap on the marker*/
+    return (token); /*return tokenized command*/
 }

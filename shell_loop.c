@@ -40,14 +40,14 @@ printf("%s@%s", userid, username);
 printf("\033[0;34m");
 printf(":%s", cwd);
 printf("\033[0;37m");
-line = read_input();
-request = tokenize_input(line);
-execute = run_cmd(request);
-free(line);
-free(request);
-if (execute >= 0)
+line = read_input(); /*script that reads the input*/
+request = tokenize_input(line); /*read_input passes the return to be tokenized*/
+execute = run_cmd(request); /*tokenize passes the tokens to run_cmd to execute*/
+free(line); /*free memory*/
+free(request); /*free memory*/
+if (execute >= 0) /*if run_cmd returns anything other than -1 (or continue)*/
 {
-    exit(execute);
+    exit(execute); /*exit process*/
 }
 }
 }
