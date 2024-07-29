@@ -11,10 +11,10 @@
 
 char *read_input(void)
 {
-    char *line;
-    size_t buffer;
+    char *line = NULL;
+    long unsigned int buffer = 0;
 
-    if(getline(line, buffer, stdin) == -1)
+    if(getline(&line, &buffer, stdin) == -1)
     {
         if(feof(stdin))
         {

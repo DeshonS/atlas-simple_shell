@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <netdb.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -11,13 +12,13 @@
 
 int run_cmd(char **request)
 {
-    char *builtin[] = (
+    char *builtin[] = {
         "cd",
         "help",
         "cwd",
         "exit",
         "env"
-    );
+    };
     int (*builtin_cmd[])(char **) = {
         &new_cd,
         &new_help,
@@ -25,11 +26,11 @@ int run_cmd(char **request)
         &new_exit,
         &new_env,
     };
-    int i;
+    long unsigned int i;
 
     if(request[0] == NULL)
     {
-        return (NULL);
+        return (-1);
     }
     for (i = 0; i < sizeof(builtin) / sizeof(char *); i++)
     {
