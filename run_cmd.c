@@ -10,9 +10,12 @@
 #include <arpa/inet.h>
 #include "main.h"
 
-int **run_cmd(char *token)
+int *run_cmd(char *token)
 {
-    char args[] = {token[0], token[1], token[2], NULL};
+    char args[];
+    token[0] = token[0];
+    token[1] = token[1];
+    token[2] = token[2];
     pid_t pid;
     int status;
     char *env_args[] = {"PATH=/bin", (char*)0};
@@ -35,7 +38,6 @@ int **run_cmd(char *token)
         {
             waitpid(pid, &status, WUNTRACED);
         }
-    }
     }
     return (-1);
 }
