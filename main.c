@@ -8,7 +8,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "main.h"
-#define clrscr() printf("\e[1;1H\e[2J")
+#define clrscr() printf("\033[1;1H\033[2J")
 
 int main(void)
 {

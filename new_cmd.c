@@ -19,7 +19,7 @@ int new_cmd(char **request)
     pid = fork();
     if (pid == 0)
     {
-        if (execvp(request[0], request) == NULL)
+        if (execvp(request[0], request) == -1)
         {
             perror("Error: child process");
         }
