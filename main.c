@@ -17,9 +17,9 @@ if (isatty(STDIN_FILENO) == 1)
 {
 shell_loop();
 }
-else
+/*else
 {
 shell_ni_loop();
-}
+}*/
 return (1);
 }
