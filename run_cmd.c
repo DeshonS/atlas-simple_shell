@@ -20,7 +20,7 @@ int **run_cmd(char *token)
     pid = fork();
     if (pid == 0)
     {
-    if execve((token[0], args[], env_args[]) == -1)
+    if (execve(token[0], args[], env_args[]) == -1)
     {
         perror("Error in child process");
     }
