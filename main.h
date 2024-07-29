@@ -2,6 +2,9 @@
 #define MAIN_H
 
 void shell_loop(void);
+char *read_input(void);
+char **tokenize_input(char *line);
+int run_cmd(char **request);
 int new_cd(char **request);
 int new_help(char **request);
 int new_cwd(char **request);

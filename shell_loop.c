@@ -23,7 +23,6 @@ void shell_loop(void)
 char hostname;
 char username[1024];
 char cwd[64];
-char input[128];
 char *userid = getlogin();
 char *line;
 char **request;
