@@ -2,42 +2,40 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
-#include <netdb.h>
 #include <string.h>
+#include <netdb.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "main.h"
 
-int run_cmd(char **request)
+int run_cmd(char *token)
 {
-    char *builtin[] = {
-        "cd",
-        "help",
-        "cwd",
-        "exit",
-        "env"
-    };
-    int (*builtin_cmd[])(char **) = {
-        &new_cd,
-        &new_help,
-        &new_cwd,
-        &new_exit,
-        &new_env,
-    };
-    long unsigned int i;
+    char args[] = {token[0], token[1], token[2], NULL};
+    pid_t pid;
+    int status;
+    char *env_args[] = {"PATH=/bin", (char*)0};
 
-    if(request[0] == NULL)
+    pid = fork();
+    if (pid == 0)
     {
-        return (-1);
+    if execve((token[0], args[], env_args[]) == -1)
+    {
+        perror("Error in child process");
     }
-    for (i = 0; i < sizeof(builtin) / sizeof(char *); i++)
+    exit(-1);
+    else if (pid < 0)
     {
-        if (strcmp(request[0], builtin[i]) == 0)
+        perror("forking error");
+    }
+    else
+    {
+        while (!WIFEXITED(status) && !WIFSIGNALED(status))
         {
-            return ((*builtin_cmd[i])(request));
+            waitpid(pid, &status, WUNTRACED);
         }
     }
-    return (new_cmd(request));
+    }
+    return (-1);
 }
