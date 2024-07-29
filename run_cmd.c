@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 #include "main.h"
 
-int run_cmd(char *token)
+int **run_cmd(char *token)
 {
     char args[] = {token[0], token[1], token[2], NULL};
     pid_t pid;
