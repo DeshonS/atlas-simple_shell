@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
-#include <string.h>
 #include <netdb.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -14,35 +13,35 @@ char **tokenize_input(char *line)
 {
     int buffer = 64;
     int i = 0;
-    char **token = malloc(buffer * sizeof(char *)); /*allocate memory for tokens*/
+    char **token = malloc(buffer * sizeof(char *));
     char *t;
 
-    if (token == NULL) /*standard memory error handling*/
+    if (token == NULL)
     {
-        fprintf(stderr, "Error"); /*print error message*/
-        exit(-1); /*exit failure*/
+        fprintf(stderr, "Error");
+        exit(-1);
     }
-    t = strtok(line, " "); /*tokenize input using spaces as breaks*/
+    t = strtok(line, " ");
     while (t != NULL)
     {
-        if (t[0] == '#') /*if the line is a comment*/
+        if (t[0] == '#')
         {
-            break; /*ignore this line*/
+            break;
         }
-        token[i] = t; /*glorified strcpy*/
-        i++; /*iterate through the input*/
-        if (i > buffer) /*if theres not enough memory allocated*/
+        token[i] = t;
+        i++;
+        if (i > buffer)
         {
-            buffer = buffer + buffer; /*set buffer to double its size*/
-            token = realloc(token, buffer * sizeof(char *)); /*reallocate memory*/
-            if (token == NULL) /*same error handling for memory*/
+            buffer = buffer + buffer;
+            token = realloc(token, buffer * sizeof(char *));
+            if (token == NULL)
             {
-                fprintf(stderr, "error"); /*error message*/
-                exit(-1); /*exit failure*/
+                fprintf(stderr, "error");
+                exit(-1);
             }
         }
-        t = strtok(NULL, " "); /*tokenize input as before*/
+        t = strtok(NULL, " ");
     }
-    token[i] = NULL; /*end tokenization with null to put a cap on the marker*/
-    return (token); /*return tokenized command*/
+    token[i] = NULL;
+    return (token);
 }

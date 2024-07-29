@@ -8,11 +8,18 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "main.h"
-#define clrscr() printf("\033[1;1H\033[2J")
+#define clrscr() printf("\e[1;1H\e[2J")
 
 int main(void)
 {
 clrscr();
+if (isatty(STDIN_FILENO) == 1)
+{
 shell_loop();
+}
+else
+{
+shell_ni_loop();
+}
 return (1);
 }
