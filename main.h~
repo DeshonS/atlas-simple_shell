@@ -6,6 +6,6 @@ char *read_input(void);
 char **tokenize_input(char *line);
 int *run_cmd(char *token);
 void shell_ni_loop(void);
-void shell_command(char **args);
+void execute_command_with_args(char *command);
 
 #endif
