@@ -42,7 +42,7 @@ printf("\033[0;34m");
 printf(":%s", cwd);
 printf("\033[0;37m");
 free(line);
-free(malloc);
+free(space);
 if (execute >= 0)
 {
     exit(execute);
