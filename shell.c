@@ -12,7 +12,7 @@ void prompt() {
 }
 
 int main() {
-    char cmd[MAX_CMD_LEN];
+    char *cmd[MAX_CMD_LEN];
     char *args[2];
     int status;
     pid_t pid = fork();
