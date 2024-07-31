@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/wait.h>
 
 #define MAX_CMD_LEN 100
+#define environ "PATH=/bin"
 
 void prompt() {
     printf("simple_shell> ");
@@ -13,16 +15,17 @@ int main() {
     char cmd[MAX_CMD_LEN];
     char *args[2];
     int status;
+    pid_t pid = fork();
     
     while (1) {
         prompt();
 
-        if (fgets(cmd, MAX_CMD_LEN, stdin) == NULL) {
+        if (getline(cmd, MAX_CMD_LEN, stdin) == NULL) {
             printf("\n");
             break;
         }
 
-        cmd[strcspn(cmd, "\n")] = '\0';  // Remove the newline character
+        cmd[strcspn(cmd, "\n")] = '\0';
 
         if (strlen(cmd) == 0) {
             continue;
@@ -31,7 +34,6 @@ int main() {
         args[0] = cmd;
         args[1] = NULL;
 
-        pid_t pid = fork();
         if (pid < 0) {
             perror("Fork failed");
             exit(EXIT_FAILURE);
