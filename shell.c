@@ -66,6 +66,7 @@ int main()
     ssize_t nread;
     char *flags[10];
     int i = 0;
+    char *token = strtok(input, " ");
 
     printf("Enter a command and flags: ");
     nread = getline(&input, &len, stdin);
@@ -78,7 +79,6 @@ int main()
 
     input[strcspn(input, "\n")] = 0;
 
-    char *token = strtok(input, " ");
     cmd = strdup(token);
 
     while ((token = strtok(NULL, " ")) != NULL)
