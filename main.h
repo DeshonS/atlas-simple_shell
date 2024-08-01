@@ -16,5 +16,6 @@
 char *read_input(void);
 char **tokenize_input(char *line);
 void run_cmd(char **tokens);
+void print_env(void);
 
 #endif
