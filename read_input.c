@@ -29,11 +29,7 @@ char *read_input(void)
         free(buffer);
         exit(1);
     }
-    printf("\033[0;32m");
-    printf("%s@%s", userid, username);
-    printf("\033[0;34m");
-    printf(":%s", cwd);
-    printf("\033[0;37m");
+    printf("S");
     getline(&line, &size, stdin);
     if (line == NULL)
     {
