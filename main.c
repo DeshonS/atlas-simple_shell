@@ -19,7 +19,10 @@ if (isatty(STDIN_FILENO) == 1)
 int status = 1;
 while (status == 1)
 {
-char *line = read_input();
+char *line;
+char **tokens;
+line = read_input();
+tokens = tokenize_input(line);
 if (line == "exit")
 {
     exit(1);
@@ -30,7 +33,6 @@ if (line == "env")
     free(line);
     return (1);
 }
-char **tokens = tokenize_input(line);
 run_cmd(tokens);
 free(line);
 free(tokens);
