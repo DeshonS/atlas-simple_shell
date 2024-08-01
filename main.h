@@ -15,6 +15,6 @@
 
 char *read_input(void);
 char **tokenize_input(char *line);
-void run_cmd(char *token);
+void run_cmd(char **tokens);
 
 #endif

@@ -2,10 +2,16 @@
 
 char **tokenize_input(char *line)
 {
-    static char *tokens[100];
+    char **tokens;
     char *token;
     size_t i;
     
+    tokens = (char **)malloc(sizeof(char) * sizeof(line));
+    if (tokens == NULL)
+    {
+        perror("Allocation error");
+        exit(1);
+    }
     token = strtok(line, " ");
     for(i = 0; token != NULL && i < 100; i++)
     {

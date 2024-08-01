@@ -41,6 +41,7 @@ char *read_input(void)
         free(buffer);
         exit(1);
     }
+    line[strcspn(line, "\n")] = 0;
     free(buffer);
     return (line);
 }

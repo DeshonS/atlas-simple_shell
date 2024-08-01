@@ -5,16 +5,13 @@ typedef struct command {
     char *path;
 } command;
 
-void run_cmd(char *tokens)
+void run_cmd(char **tokens)
 {
     pid_t pid = fork();
     int i;
     command commands[] = {
         {"ls", "/bin/ls"},
         {"exit", "/bin/exit"},
-        {"help", "/bin/help"},
-        {"env", "/bin/env"},
-        {NULL, NULL}
     };
 
     if (pid == -1)
@@ -24,31 +21,34 @@ void run_cmd(char *tokens)
     }
     else if (pid == 0)
     {
-    char *args[] = {tokens, NULL};
-    char *env[] = {"PATH=/bin", NULL};
-    for (i = 0; commands[i].input != NULL; i++)
-    {
-    if(strcmp(commands[i].input, tokens) == 0)
-    {
-    execve(commands[i].path, args, env);
-    }
-    }
-    perror("command not found");
-    exit(EXIT_FAILURE);
+        char *env[] = {"PATH=/bin", NULL};
+
+        printf("%s\n", tokens[0]);
+        for (i = 0; commands[i].input != NULL; i++)
+        {
+            if (strcmp(commands[i].input, tokens[0]) == 0)
+            {
+                execve(commands[i].path, tokens, env);
+                perror("execve error");
+                exit(EXIT_FAILURE);
+            }
+        }
+
+        perror("command not found");
     }
     else
     {
         int status;
         waitpid(pid, &status, 0);
-        if(WIFEXITED(status))
+        if (WIFEXITED(status))
         {
-            if (WEXITSTATUS(status) == 0)
+            if (WEXITSTATUS(status) != 0)
             {
-                printf("success\n");
+                printf("Command failed with exit code %d\n", WEXITSTATUS(status));
             }
             else
             {
-                printf("fail");
+                printf("success\n");
             }
         }
     }

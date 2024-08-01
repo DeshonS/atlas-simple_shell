@@ -21,13 +21,14 @@ while (status == 1)
 {
 char *line = read_input();
 char **tokens = tokenize_input(line);
-run_cmd(tokens[0]);
+run_cmd(tokens);
 free(line);
+free(tokens);
 }
 }
 /*else
 {
 shell_ni_loop();
 }*/
-return (1);
+return (0);
 }
