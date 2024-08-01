@@ -10,6 +10,8 @@
 #include <arpa/inet.h>
 #include "main.h"
 #define clrscr() printf("\033[1;1H\033[2J")
+#define _exit "exit"
+#define env "env"
 
 int main(void)
 {
@@ -23,11 +25,11 @@ char *line;
 char **tokens;
 line = read_input();
 tokens = tokenize_input(line);
-if (line == "exit")
+if (line == _exit)
 {
     exit(1);
 }
-if (line == "env")
+if (line == env)
 {
     print_env();
     free(line);

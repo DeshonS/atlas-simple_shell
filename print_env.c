@@ -1,4 +1,5 @@
 #include "main.h"
+extern char **environ;
 
 void print_env(void)
 {
