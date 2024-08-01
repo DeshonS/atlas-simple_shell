@@ -20,6 +20,16 @@ int status = 1;
 while (status == 1)
 {
 char *line = read_input();
+if (line == "exit")
+{
+    exit(1);
+}
+if (line == "env")
+{
+    print_env();
+    free(line);
+    return (1);
+}
 char **tokens = tokenize_input(line);
 run_cmd(tokens);
 free(line);
