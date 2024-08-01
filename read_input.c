@@ -1,26 +1,10 @@
 #include "main.h"
 
-void checkhostname(int hostname)
-{
-    if (hostname == -1)
-    {
-        perror("gethostname");
-        exit(1);
-    }
-}
-
 char *read_input(void)
 {
     char *buffer;
     size_t size = 32;
     char *line = NULL;
-    char hostname;
-    char username[1024];
-    char cwd[64];
-    char *userid = getlogin();
-    hostname = gethostname(username, sizeof(username));
-    getcwd(cwd, sizeof(cwd));
-    checkhostname(hostname);
 
     buffer = (char *)malloc(size * sizeof(char));
     if (buffer == NULL)
