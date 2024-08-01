@@ -35,6 +35,7 @@ void run_cmd(char **tokens)
         }
 
         perror("command not found");
+        exit(-1);
     }
     else
     {
