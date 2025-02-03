@@ -21,10 +21,6 @@ char *line;
 char **tokens;
 line = read_input();
 tokens = tokenize_input(line);
-if (strcmp(line, "exit"))
-{
-    exit(1);
-}
 if (strcmp(line, "env"))
 {
     print_env();
